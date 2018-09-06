@@ -14,7 +14,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @coversDefaultClass \Drupal\typed_data\DataFilterManager
  */
-class DataFiterTest extends KernelTestBase {
+class DataFilterTest extends KernelTestBase {
 
   /**
    * The typed data manager.
