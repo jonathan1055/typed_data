@@ -3,6 +3,7 @@
 namespace Drupal\Tests\typed_data\Kernel;
 
 use Drupal\Core\Datetime\Entity\DateFormat;
+use Drupal\Core\Entity\TypedData\EntityDataDefinition;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\TypedData\DataDefinition;
 use Drupal\KernelTests\KernelTestBase;
@@ -35,7 +36,7 @@ class DataFilterTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['typed_data', 'system', 'user'];
+  public static $modules = ['typed_data', 'system', 'node', 'user'];
 
   /**
    * {@inheritdoc}
@@ -131,6 +132,37 @@ class DataFilterTest extends KernelTestBase {
     $metadata = new BubbleableMetadata();
     $filter->filter($data->getDataDefinition(), $data->getValue(), ['custom', 'Y'], $metadata);
     $this->assertEquals([], $metadata->getCacheTags());
+  }
+
+  /**
+   * @covers \Drupal\typed_data\Plugin\TypedDataFilter\StripTagsFilter
+   */
+  public function testStripTagsFilter() {
+    $filter = $this->dataFilterManager->createInstance('striptags');
+    $data = $this->typedDataManager->create(DataDefinition::create('string'), '<b>Test <em>striptags</em> filter</b>');
+
+    $this->assertTrue($filter->canFilter($data->getDataDefinition()));
+    $this->assertFalse($filter->canFilter(DataDefinition::create('any')));
+
+    $this->assertEquals('string', $filter->filtersTo($data->getDataDefinition(), [])->getDataType());
+
+    $this->assertEquals('Test striptags filter', $filter->filter($data->getDataDefinition(), $data->getValue(), []));
+  }
+
+  /**
+   * @covers \Drupal\typed_data\Plugin\TypedDataFilter\EntityUrlFilter
+   */
+  public function testEntityUrlFilter() {
+    $filter = $this->dataFilterManager->createInstance('entity_url');
+    $data = $this->typedDataManager->create(EntityDataDefinition::create('node'));
+
+    $this->assertTrue($filter->canFilter($data->getDataDefinition()));
+    $this->assertFalse($filter->canFilter(DataDefinition::create('any')));
+
+    $this->assertEquals('uri', $filter->filtersTo($data->getDataDefinition(), [])->getDataType());
+
+    // @todo Test the output of the filter.
+    //$this->assertEquals('what do we expect here?', $filter->filter($data->getDataDefinition(), $data->getValue(), []));
   }
 
 }

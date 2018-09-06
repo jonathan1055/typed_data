@@ -5,6 +5,7 @@ namespace Drupal\typed_data\Plugin\TypedDataFilter;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\TypedData\EntityDataDefinitionInterface;
 use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\typed_data\DataFilterBase;
 
@@ -39,7 +40,7 @@ class EntityUrlFilter extends DataFilterBase {
    * {@inheritdoc}
    */
   public function filtersTo(DataDefinitionInterface $definition, array $arguments) {
-    return 'uri';
+    return DataDefinition::create('uri');
   }
 
 }

@@ -3,6 +3,7 @@
 namespace Drupal\typed_data\Plugin\TypedDataFilter;
 
 use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\Core\TypedData\Type\StringInterface;
 use Drupal\typed_data\DataFilterBase;
@@ -35,7 +36,7 @@ class StripTagsFilter extends DataFilterBase {
    * {@inheritdoc}
    */
   public function filtersTo(DataDefinitionInterface $definition, array $arguments) {
-    return 'string';
+    return DataDefinition::create('string');
   }
 
 }
