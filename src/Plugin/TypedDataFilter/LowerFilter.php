@@ -13,7 +13,7 @@ use Drupal\typed_data\DataFilterBase;
  *
  * @DataFilter(
  *   id = "lower",
- *   label = @Translation("Convert to lower-case")
+ *   label = @Translation("Converts a string to lower case.")
  * )
  */
 class LowerFilter extends DataFilterBase {

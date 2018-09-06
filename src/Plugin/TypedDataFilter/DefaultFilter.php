@@ -12,7 +12,7 @@ use Drupal\typed_data\DataFilterBase;
  *
  * @DataFilter(
  *   id = "default",
- *   label = @Translation("Applies a default-value if there is no value."),
+ *   label = @Translation("Applies a default value if there is no value."),
  * )
  */
 class DefaultFilter extends DataFilterBase {
