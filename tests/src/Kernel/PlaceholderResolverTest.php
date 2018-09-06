@@ -132,11 +132,21 @@ class PlaceholderResolverTest extends KernelTestBase {
    * @covers ::resolvePlaceholders
    */
   public function testResolvingPlaceholders() {
+    // Test resolving multiple tokens.
     $text = 'test {{node.title}} and {{node.title.value}}';
     $result = $this->placeholderResolver->resolvePlaceholders($text, ['node' => $this->node->getTypedData()]);
     $expected = [
       '{{node.title}}' => 'test',
       '{{node.title.value}}' => 'test',
+    ];
+    $this->assertEquals($expected, $result);
+
+    // Test resolving multiple tokens, one with a filter.
+    $this->node->title->value = 'tEsT';
+    $result = $this->placeholderResolver->resolvePlaceHolders("test {{ node.title.value | lower }} and {{ node.title.value }}", ['node' => $this->node->getTypedData()]);
+    $expected = [
+      '{{ node.title.value | lower }}' => 'test',
+      '{{ node.title.value }}' => 'tEsT',
     ];
     $this->assertEquals($expected, $result);
 
@@ -224,16 +234,24 @@ class PlaceholderResolverTest extends KernelTestBase {
    * @covers ::replacePlaceHolders
    */
   public function testApplyingFilters() {
+    // Test filter expression.
     $this->node->field_integer = [1, 2, NULL];
     $this->node->title->value = NULL;
     $result = $this->placeholderResolver->replacePlaceHolders("test {{node.field_integer.2.value|default('0')}}", ['node' => $this->node->getTypedData()]);
     $this->assertEquals('test 0', $result);
+
+    // Test piping filter expressions.
     $result = $this->placeholderResolver->replacePlaceHolders("test {{node.title.value|default('tEsT')|lower}}", ['node' => $this->node->getTypedData()]);
     $this->assertEquals('test test', $result);
 
-    // Test filter expressions with whitespaces.
+    // Test piping filter expressions with whitespaces.
     $result = $this->placeholderResolver->replacePlaceHolders("test {{ node.title.value | default('tEsT') | lower }}", ['node' => $this->node->getTypedData()]);
     $this->assertEquals('test test', $result);
+
+    // Test multiple tokens with filters.
+    $this->node->title->value = 'tEsT';
+    $result = $this->placeholderResolver->replacePlaceHolders("test {{ node.title.value | lower }} and {{ node.title.value }}", ['node' => $this->node->getTypedData()]);
+    $this->assertEquals('test test and tEsT', $result);
 
     // Test a filter expression on data without accessing a property.
     $text = 'test {{string | lower}}';

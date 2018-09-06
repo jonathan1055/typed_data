@@ -67,8 +67,8 @@ class PlaceholderResolver implements PlaceholderResolverInterface {
           if ($filters) {
             $value = $fetched_data->getValue();
             $definition = $fetched_data->getDataDefinition();
-            foreach ($filters as $data) {
-              list($filter_id, $arguments) = $data;
+            foreach ($filters as $filter_data) {
+              list($filter_id, $arguments) = $filter_data;
               $filter = $this->dataFilterManager->createInstance($filter_id);
               if (!$filter->allowsNullValues() && !isset($value)) {
                 throw new MissingDataException("There is no data value for filter '$filter_id' to work on.");
