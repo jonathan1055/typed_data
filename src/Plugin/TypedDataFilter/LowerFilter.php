@@ -22,7 +22,7 @@ class LowerFilter extends DataFilterBase {
    * {@inheritdoc}
    */
   public function filter(DataDefinitionInterface $definition, $value, array $arguments, BubbleableMetadata $bubbleable_metadata = NULL) {
-    return strtolower($value);
+    return mb_strtolower($value);
   }
 
   /**

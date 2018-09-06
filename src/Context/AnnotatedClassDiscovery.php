@@ -26,7 +26,7 @@ class AnnotatedClassDiscovery extends CoreAnnotatedClassDiscovery {
       // Condition annotations gets picked.
       $this->annotationReader->addNamespace('Drupal\typed_data\Context\Annotation');
       // Add the namespaces from the main plugin annotation, like @EntityType.
-      $namespace = substr($this->pluginDefinitionAnnotationName, 0, strrpos($this->pluginDefinitionAnnotationName, '\\'));
+      $namespace = mb_substr($this->pluginDefinitionAnnotationName, 0, mb_strrpos($this->pluginDefinitionAnnotationName, '\\'));
       $this->annotationReader->addNamespace($namespace);
       // Add general core annotations like @Translation.
       $this->annotationReader->addNamespace('Drupal\Core\Annotation');
