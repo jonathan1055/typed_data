@@ -192,6 +192,7 @@ class PlaceholderResolver implements PlaceholderResolverInterface {
     // $tokens grouped by $name, pointing to the version of the token found in
     // the source text. For example,
     // $results['node']['title'] = '{{node.title}}';
+    // where '{{node.title}}' is found in the source text.
     $results = [];
     for ($i = 0; $i < count($tokens); $i++) {
       // Remove leading whitespaces and ".", but not the | denoting a filter.

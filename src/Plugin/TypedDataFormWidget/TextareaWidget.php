@@ -16,10 +16,12 @@ use Drupal\typed_data\Widget\FormWidgetBase;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
+ * Plugin implementation of the 'textarea' widget.
+ *
  * @TypedDataFormWidget(
  *   id = "textarea",
  *   label = @Translation("Textarea"),
- *   description = @Translation("A multi line text input widget."),
+ *   description = @Translation("A multi-line text input widget."),
  * )
  */
 class TextareaWidget extends FormWidgetBase {

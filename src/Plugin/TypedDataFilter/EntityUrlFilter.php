@@ -25,7 +25,7 @@ class EntityUrlFilter extends DataFilterBase {
   public function filter(DataDefinitionInterface $definition, $value, array $arguments, BubbleableMetadata $bubbleable_metadata = NULL) {
     assert($value instanceof EntityInterface);
     // @todo: url() is deprecated, but toUrl() does not work for file entities,
-    // thus move to url() once toUrl() works for file entities also.
+    // thus remove url() once toUrl() works for file entities also.
     return $value->url('canonical', ['absolute' => TRUE]);
   }
 
