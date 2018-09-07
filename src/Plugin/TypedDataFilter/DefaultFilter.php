@@ -8,7 +8,7 @@ use Drupal\Core\TypedData\Type\StringInterface;
 use Drupal\typed_data\DataFilterBase;
 
 /**
- * A data filter lowering all string characters.
+ * A data filter providing a default value if no value is set.
  *
  * @DataFilter(
  *   id = "default",

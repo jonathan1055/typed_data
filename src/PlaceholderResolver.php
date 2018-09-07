@@ -109,7 +109,7 @@ class PlaceholderResolver implements PlaceholderResolverInterface {
    * @param string $main_part
    *   The main placeholder part.
    * @param string $placeholder
-   *   The full placeholer string.
+   *   The full placeholder string.
    *
    * @return array[]
    *   An numerically indexed arrays containing:
@@ -176,12 +176,12 @@ class PlaceholderResolver implements PlaceholderResolverInterface {
   public function scan($text) {
     // Matches tokens with the following pattern: {{ $name.$property_path }}
     // $name and $property_path may not contain {{ }} characters.
-    // $name may not contain : or whitespace characters, but $property_path may.
+    // $name may not contain . or whitespace characters, but $property_path may.
     preg_match_all('/
       \{\{             # {{ - pattern start
-      ([^\{\}.|]+)      # match $type not containing whitespace . { or }
-      ((.|\|)          # . - separator
-      ([^\{\}]+))?     # match $name not containing { or }
+      ([^\{\}.|]+)     # match $name not containing whitespace . | { or }
+      ((.|\|)          # . or | - separator
+      ([^\{\}]+))?     # match $property_path not containing { or }
       \}\}             # }} - pattern end
       /x', $text, $matches);
 
@@ -189,9 +189,9 @@ class PlaceholderResolver implements PlaceholderResolverInterface {
     $tokens = $matches[2];
 
     // Iterate through the matches, building an associative array containing
-    // $tokens grouped by $types, pointing to the version of the token found in
+    // $tokens grouped by $name, pointing to the version of the token found in
     // the source text. For example,
-    // $results['node']['title'] = '[node.title]';.
+    // $results['node']['title'] = '{{node.title}}';
     $results = [];
     for ($i = 0; $i < count($tokens); $i++) {
       // Remove leading whitespaces and ".", but not the | denoting a filter.
