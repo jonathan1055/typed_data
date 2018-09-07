@@ -6,7 +6,8 @@ use Drupal\Core\Datetime\Entity\DateFormat;
 use Drupal\Core\Entity\TypedData\EntityDataDefinition;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\TypedData\DataDefinition;
-use Drupal\KernelTests\KernelTestBase;
+use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
+use Drupal\node\Entity\Node;
 
 /**
  * Tests using typed data filters.
@@ -15,7 +16,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @coversDefaultClass \Drupal\typed_data\DataFilterManager
  */
-class DataFilterTest extends KernelTestBase {
+class DataFilterTest extends EntityKernelTestBase {
 
   /**
    * The typed data manager.
@@ -36,7 +37,7 @@ class DataFilterTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['typed_data', 'system', 'node', 'user'];
+  public static $modules = ['typed_data', 'node'];
 
   /**
    * {@inheritdoc}
@@ -46,8 +47,8 @@ class DataFilterTest extends KernelTestBase {
     $this->typedDataManager = $this->container->get('typed_data_manager');
     $this->dataFilterManager = $this->container->get('plugin.manager.typed_data_filter');
 
-    // Make sure default date formats are there for testing the format_date
-    // filter.
+    // Make sure default date formats are available
+    // for testing the format_date filter.
     $this->installConfig(['system']);
   }
 
@@ -153,16 +154,25 @@ class DataFilterTest extends KernelTestBase {
    * @covers \Drupal\typed_data\Plugin\TypedDataFilter\EntityUrlFilter
    */
   public function testEntityUrlFilter() {
+    /* @var $node \Drupal\node\NodeInterface */
+    $node = Node::create([
+      'title' => 'Test node',
+      'type' => 'page',
+    ]);
+    $node->save();
+
     $filter = $this->dataFilterManager->createInstance('entity_url');
     $data = $this->typedDataManager->create(EntityDataDefinition::create('node'));
+    $data->setValue($node);
 
     $this->assertTrue($filter->canFilter($data->getDataDefinition()));
     $this->assertFalse($filter->canFilter(DataDefinition::create('any')));
 
     $this->assertEquals('uri', $filter->filtersTo($data->getDataDefinition(), [])->getDataType());
 
-    // @todo Test the output of the filter.
-    //$this->assertEquals('what do we expect here?', $filter->filter($data->getDataDefinition(), $data->getValue(), []));
+    // Test the output of the filter.
+    $output = $filter->filter($data->getDataDefinition(), $data->getValue(), []);
+    $this->assertEquals($node->toUrl('canonical', ['absolute' => TRUE])->toString(), $output);
   }
 
 }
