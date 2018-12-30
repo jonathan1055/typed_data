@@ -168,9 +168,10 @@ class DataFetcher implements DataFetcherInterface {
     if ($partial_property_path == '') {
       return array_keys($data_definitions);
     }
+
     $results = [];
-    // If the supplied path is part of the top level variable names then suggest
-    // them directly.
+    // Suggest top level variables where the partial path matches the start of
+    // the top level variable name.
     foreach ($data_definitions as $variable_name => $data_definition) {
       if (stripos($variable_name, $partial_property_path) === 0) {
         $results = array_merge($results, $this->getAutocompleteSuggestion($data_definition, $variable_name));
@@ -286,7 +287,7 @@ class DataFetcher implements DataFetcherInterface {
    * @return array[]
    *   A list of autocomplete suggestions - valid property paths for the
    *   provided data definition. Each entry is an array with the following keys:
-   *   - value: the data selecor property path.
+   *   - value: the data selector property path.
    *   - label: the human readable label suggestion.
    */
   protected function getAutocompleteSuggestion(DataDefinitionInterface $data_definition, $variable_name) {

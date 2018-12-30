@@ -9,6 +9,8 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\typed_data\Exception\InvalidArgumentException;
 
 /**
+ * Tests that data fetcher definition fetching functions work correctly.
+ *
  * @coversDefaultClass \Drupal\typed_data\DataFetcher
  *
  * @group typed_data
