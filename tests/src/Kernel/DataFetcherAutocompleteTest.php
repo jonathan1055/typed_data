@@ -58,6 +58,7 @@ class DataFetcherAutocompleteTest extends KernelTestBase {
     parent::setUp();
 
     $this->installEntitySchema('user');
+    $this->installEntitySchema('node');
 
     // The global CurrentUserContext doesn't work properly without a
     // fully-installed user module.

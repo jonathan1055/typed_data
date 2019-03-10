@@ -68,6 +68,15 @@ class PlaceholderResolverTest extends KernelTestBase {
    */
   protected function setUp() {
     parent::setUp();
+
+    $this->installEntitySchema('user');
+    $this->installEntitySchema('node');
+    $this->installSchema('system', ['sequences']);
+
+    // Make sure default date formats are there for testing the format_date
+    // filter.
+    $this->installConfig(['system']);
+
     $this->typedDataManager = $this->container->get('typed_data_manager');
     $this->entityTypeManager = $this->container->get('entity_type.manager');
     $this->placeholderResolver = $this->container->get('typed_data.placeholder_resolver');
@@ -89,19 +98,11 @@ class PlaceholderResolverTest extends KernelTestBase {
       'bundle' => 'page',
     ])->save();
 
-    $this->installSchema('system', ['sequences']);
-    $this->installEntitySchema('user');
-    $this->installEntitySchema('node');
-
     $this->node = $this->entityTypeManager->getStorage('node')
       ->create([
         'title' => 'test',
         'type' => 'page',
       ]);
-
-    // Make sure default date formats are there for testing the format_date
-    // filter.
-    $this->installConfig(['system']);
   }
 
   /**
