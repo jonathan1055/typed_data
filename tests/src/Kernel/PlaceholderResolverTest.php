@@ -127,6 +127,84 @@ class PlaceholderResolverTest extends KernelTestBase {
         '| filter' => '{{ date | filter }}',
       ],
     ], $placeholders);
+    // Test a simple placeholder with and without a filter.
+    $text = "text {{ date | filter }} text {{ date }}";
+    $placeholders = $this->placeholderResolver->scan($text);
+    $this->assertEquals([
+      'date' => [
+        '| filter' => '{{ date | filter }}',
+        '' => '{{ date }}',
+      ],
+    ], $placeholders);
+    // Test a compound placeholder with and without a filter.
+    $text = "text {{ node.title.value | lower }} text {{ node.title.value }}";
+    $placeholders = $this->placeholderResolver->scan($text);
+    $this->assertEquals([
+      'node' => [
+        'title.value | lower' => '{{ node.title.value | lower }}',
+        'title.value' => '{{ node.title.value }}',
+      ],
+    ], $placeholders);
+  }
+
+  /**
+   * @covers ::scan
+   */
+  public function testEmptyPlaceholders() {
+    $text = 'text {{ }} text';
+    $placeholders = $this->placeholderResolver->scan($text);
+    $this->assertEquals([
+      '' => [
+        '' => '{{ }}',
+      ],
+    ], $placeholders);
+  }
+
+  /**
+   * @covers ::scan
+   */
+  public function testNoPlaceholders() {
+    $text = 'test text does not have any placeholders';
+    $placeholders = $this->placeholderResolver->scan($text);
+    $this->assertEquals([], $placeholders);
+  }
+
+  /**
+   * @covers ::scan
+   */
+  public function testMalformedPlaceholders() {
+    $text = "text {{ node. title }} text";
+    $placeholders = $this->placeholderResolver->scan($text);
+    $this->assertEquals([], $placeholders);
+
+    $text = "text {{ node .title }} text";
+    $placeholders = $this->placeholderResolver->scan($text);
+    $this->assertEquals([], $placeholders);
+
+    $text = "text {{node.}} text";
+    $placeholders = $this->placeholderResolver->scan($text);
+    $this->assertEquals([], $placeholders);
+
+    $text = "text {{ node| }} text";
+    $placeholders = $this->placeholderResolver->scan($text);
+    $this->assertEquals([], $placeholders);
+
+    $text = "text {{ no de }} text";
+    $placeholders = $this->placeholderResolver->scan($text);
+    $this->assertEquals([], $placeholders);
+  }
+
+  /**
+   * @covers ::scan
+   */
+  public function testFilterOnly() {
+    $text = "text {{ |filter }} text";
+    $placeholders = $this->placeholderResolver->scan($text);
+    $this->assertEquals([
+      '' => [
+        '|filter' => '{{ |filter }}',
+      ],
+    ], $placeholders);
   }
 
   /**
