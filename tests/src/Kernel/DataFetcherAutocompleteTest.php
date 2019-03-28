@@ -8,7 +8,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 
 /**
- * Tests that data fetcher autocomplete funciton works correctly.
+ * Tests that data fetcher autocomplete function works correctly.
  *
  * @coversDefaultClass \Drupal\typed_data\DataFetcher
  *
