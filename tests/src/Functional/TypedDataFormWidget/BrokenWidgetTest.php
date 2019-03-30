@@ -9,7 +9,6 @@ use Drupal\Core\TypedData\MapDataDefinition;
 use Drupal\Core\TypedData\TypedDataTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\typed_data\Traits\BrowserTestHelpersTrait;
-use Drupal\typed_data\Util\StateTrait;
 use Drupal\typed_data\Widget\FormWidgetManagerTrait;
 
 /**
@@ -23,7 +22,6 @@ class BrokenWidgetTest extends BrowserTestBase {
 
   use BrowserTestHelpersTrait;
   use FormWidgetManagerTrait;
-  use StateTrait;
   use TypedDataTrait;
 
   /**
@@ -79,7 +77,7 @@ class BrokenWidgetTest extends BrowserTestBase {
     $data_type = 'string';
     $context_definition = ContextDefinition::create($data_type)
       ->setLabel('Example string');
-    $this->getState()->set('typed_data_widgets.definition', $context_definition);
+    \Drupal::state()->set('typed_data_widgets.definition', $context_definition);
 
     $this->drupalLogin($this->createUser([], NULL, TRUE));
     $path = 'admin/config/user-interface/typed-data-widgets/' . $this->widget->getPluginId();

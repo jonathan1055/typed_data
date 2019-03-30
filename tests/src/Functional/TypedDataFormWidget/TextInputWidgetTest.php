@@ -9,7 +9,6 @@ use Drupal\Core\TypedData\MapDataDefinition;
 use Drupal\Core\TypedData\TypedDataTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\typed_data\Traits\BrowserTestHelpersTrait;
-use Drupal\typed_data\Util\StateTrait;
 use Drupal\typed_data\Widget\FormWidgetManagerTrait;
 
 /**
@@ -23,7 +22,6 @@ class TextInputWidgetTest extends BrowserTestBase {
 
   use BrowserTestHelpersTrait;
   use FormWidgetManagerTrait;
-  use StateTrait;
   use TypedDataTrait;
 
   /**
@@ -80,7 +78,7 @@ class TextInputWidgetTest extends BrowserTestBase {
       ->setLabel('Example string')
       ->setDescription('Some example string')
       ->setDefaultValue('default1');
-    $this->getState()->set('typed_data_widgets.definition', $context_definition);
+    \Drupal::state()->set('typed_data_widgets.definition', $context_definition);
 
     $this->drupalLogin($this->createUser([], NULL, TRUE));
     $path = 'admin/config/user-interface/typed-data-widgets/' . $this->widget->getPluginId();
@@ -107,7 +105,7 @@ class TextInputWidgetTest extends BrowserTestBase {
       ->setDescription('Some example string')
       ->setDefaultValue('default1')
       ->addConstraint('Length', ['max' => 3]);
-    $this->getState()->set('typed_data_widgets.definition', $context_definition);
+    \Drupal::state()->set('typed_data_widgets.definition', $context_definition);
 
     $this->drupalLogin($this->createUser([], NULL, TRUE));
     $path = 'admin/config/user-interface/typed-data-widgets/' . $this->widget->getPluginId();
