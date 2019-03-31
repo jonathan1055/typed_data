@@ -149,7 +149,7 @@ class FormWidgetExampleForm extends FormBase {
 
     // Read and write widget configuration via the state.
     $this->state->set('typed_data_widgets.' . $widget_id, $data->getValue());
-    drupal_set_message($this->t('Value saved'));
+    $this->messenger()->addMessage($this->t('Value saved'));
   }
 
 }
