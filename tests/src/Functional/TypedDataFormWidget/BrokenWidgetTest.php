@@ -83,12 +83,14 @@ class BrokenWidgetTest extends BrowserTestBase {
     $path = 'admin/config/user-interface/typed-data-widgets/' . $this->widget->getPluginId();
     $this->drupalGet($path);
 
-    $this->assertSession()->elementTextContains('css', 'label[for=edit-data-value]', $context_definition->getLabel());
-    $this->assertSession()->elementTextContains('css', 'div[id=edit-data-value]', 'No widget exists for this data type.');
+    /** @var \Drupal\Tests\WebAssert $assert */
+    $assert = $this->assertSession();
+    $assert->elementTextContains('css', 'label[for=edit-data-value]', $context_definition->getLabel());
+    $assert->elementTextContains('css', 'div[id=edit-data-value]', 'No widget exists for this data type.');
 
     $this->pressButton('Submit');
 
-    $this->assertSession()->pageTextContains(sprintf('The field %s consists of the data type %s which cannot be input or a widget for this data type is not implemented yet.', $context_definition->getLabel(), $data_type));
+    $assert->pageTextContains(sprintf('The field %s consists of the data type %s which cannot be input or a widget for this data type is not implemented yet.', $context_definition->getLabel(), $data_type));
   }
 
 }

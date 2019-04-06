@@ -84,15 +84,17 @@ class TextareaWidgetTest extends BrowserTestBase {
     $path = 'admin/config/user-interface/typed-data-widgets/' . $this->widget->getPluginId();
     $this->drupalGet($path);
 
-    $this->assertSession()->elementTextContains('css', 'label[for=edit-data-value]', $context_definition->getLabel());
-    $this->assertSession()->elementTextContains('css', 'div[id=edit-data-value--description]', $context_definition->getDescription());
-    $this->assertSession()->fieldValueEquals('data[value]', $context_definition->getDefaultValue());
+    /** @var \Drupal\Tests\WebAssert $assert */
+    $assert = $this->assertSession();
+    $assert->elementTextContains('css', 'label[for=edit-data-value]', $context_definition->getLabel());
+    $assert->elementTextContains('css', 'div[id=edit-data-value--description]', $context_definition->getDescription());
+    $assert->fieldValueEquals('data[value]', $context_definition->getDefaultValue());
 
     $this->fillField('data[value]', 'jump');
     $this->pressButton('Submit');
 
     $this->drupalGet($path);
-    $this->assertSession()->fieldValueEquals('data[value]', 'jump');
+    $assert->fieldValueEquals('data[value]', 'jump');
   }
 
 }
