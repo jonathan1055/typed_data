@@ -86,7 +86,7 @@ interface FormWidgetInterface extends ConfigurablePluginInterface, PluginInspect
    * @param \Drupal\Core\TypedData\DataDefinitionInterface $definition
    *   The definition of the edited data.
    *
-   * @return ContextDefinitionInterface[]
+   * @return \Drupal\typed_data\Context\ContextDefinitionInterface[]
    *   An array of context definitions describing the configuration values,
    *   keyed by configuration setting name. The keys must match the actual keys
    *   of the supported configuration.
