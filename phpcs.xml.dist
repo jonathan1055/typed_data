@@ -3,10 +3,14 @@
   <description>Default PHP CodeSniffer configuration for Typed Data</description>
   <file>.</file>
 
-  <arg name="extensions" value="inc,install,module,php,profile,test,theme,yml"/>
+  <arg name="extensions" value="inc,install,module,php,profile,txt,yml"/>
   <!-- Use 's' to print the full sniff name in the report. -->
   <arg value="s"/>
   <arg value="-colors"/>
+
+  <!-- ignore all files that match these patterns -->
+  <exclude-pattern>vendor</exclude-pattern>
+  <exclude-pattern>_ignore*</exclude-pattern>
 
   <!-- Include all Drupal and DrupalPractice sniffs by default, then adjust. -->
   <rule ref="Drupal"/>
