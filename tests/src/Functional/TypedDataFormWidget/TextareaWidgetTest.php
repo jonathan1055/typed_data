@@ -75,9 +75,9 @@ class TextareaWidgetTest extends BrowserTestBase {
    */
   public function testFormEditing() {
     $context_definition = ContextDefinition::create('string')
-      ->setLabel('Example string')
-      ->setDescription('Some example string')
-      ->setDefaultValue('default1');
+      ->setLabel('Example textarea')
+      ->setDescription('Some example textarea')
+      ->setDefaultValue('A string longer than eight characters');
     $this->container->get('state')->set('typed_data_widgets.definition', $context_definition);
 
     $this->drupalLogin($this->createUser([], NULL, TRUE));
