@@ -43,7 +43,7 @@ class DataDefinitionFetcherTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['typed_data', 'system', 'node', 'field', 'user'];
+  protected static $modules = ['typed_data', 'system', 'node', 'field', 'user'];
 
   /**
    * {@inheritdoc}

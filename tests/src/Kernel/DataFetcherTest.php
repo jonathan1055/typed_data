@@ -53,7 +53,7 @@ class DataFetcherTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'typed_data',
     'system',
     'node',
