@@ -51,7 +51,7 @@ class DataFilterTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->typedDataManager = $this->container->get('typed_data_manager');
     $this->dataFilterManager = $this->container->get('plugin.manager.typed_data_filter');
