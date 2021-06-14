@@ -38,11 +38,11 @@ class TextDataTypeTest extends KernelTestBase {
     $this->assertInstanceOf(StringInterface::class, $typed_data, 'Typed Data object is an instance of StringInterface).');
 
     // Check basic get and set functionality.
-    $this->assertTrue($typed_data->getValue() === $value, 'Text value was fetched.');
+    $this->assertSame($value, $typed_data->getValue(), 'Text value was fetched.');
     $this->assertEquals(0, $typed_data->validate()->count());
     $new_value = $this->randomString() . "\r\n" . $this->randomString();
     $typed_data->setValue($new_value);
-    $this->assertTrue($typed_data->getValue() === $new_value, 'Text value was changed.');
+    $this->assertSame($new_value, $typed_data->getValue(), 'Text value was changed.');
     $this->assertEquals(0, $typed_data->validate()->count());
   }
 
