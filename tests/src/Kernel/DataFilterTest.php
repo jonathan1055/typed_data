@@ -230,7 +230,7 @@ class DataFilterTest extends KernelTestBase {
     $this->installEntitySchema('user');
     $this->installEntitySchema('node');
 
-    /* @var \Drupal\node\NodeInterface $node */
+    /** @var \Drupal\node\NodeInterface $node */
     $node = Node::create([
       'title' => 'Test node',
       'type' => 'page',
@@ -256,7 +256,7 @@ class DataFilterTest extends KernelTestBase {
    */
   public function testFileEntityUrlFilter() {
     file_put_contents('public://example.txt', $this->randomMachineName());
-    /* @var \Drupal\file\FileInterface $file */
+    /** @var \Drupal\file\FileInterface $file */
     $file = File::create([
       'uri' => 'public://example.txt',
     ]);
