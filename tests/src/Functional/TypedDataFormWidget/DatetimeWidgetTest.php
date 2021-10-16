@@ -40,7 +40,7 @@ class DatetimeWidgetTest extends FormWidgetBrowserTestBase {
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('any')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('binary')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('boolean')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('datetime_iso8601')));;
+    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('datetime_iso8601')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('duration_iso8601')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('email')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('float')));
