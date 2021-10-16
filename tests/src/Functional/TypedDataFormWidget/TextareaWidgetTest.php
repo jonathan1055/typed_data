@@ -8,7 +8,7 @@ use Drupal\Core\TypedData\ListDataDefinition;
 use Drupal\Core\TypedData\MapDataDefinition;
 
 /**
- * Class TextInputWidgetTest.
+ * Tests operation of the 'textarea' TypedDataForm widget plugin.
  *
  * @group typed_data
  *

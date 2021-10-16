@@ -8,7 +8,7 @@ use Drupal\Core\TypedData\ListDataDefinition;
 use Drupal\Core\TypedData\MapDataDefinition;
 
 /**
- * Class BrokenWidgetTest.
+ * Tests operation of the 'broken' TypedDataForm widget plugin.
  *
  * @group typed_data
  *

@@ -9,7 +9,7 @@ use Drupal\Core\TypedData\ListDataDefinition;
 use Drupal\Core\TypedData\MapDataDefinition;
 
 /**
- * Class DatetimeWidgetTest.
+ * Tests operation of the 'datetime' TypedDataForm widget plugin.
  *
  * @group typed_data
  *

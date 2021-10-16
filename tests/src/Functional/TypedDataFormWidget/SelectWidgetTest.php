@@ -8,7 +8,7 @@ use Drupal\Core\TypedData\ListDataDefinition;
 use Drupal\Core\TypedData\MapDataDefinition;
 
 /**
- * Class SelectWidgetTest.
+ * Tests operation of the 'select' TypedDataForm widget plugin.
  *
  * @group typed_data
  *
