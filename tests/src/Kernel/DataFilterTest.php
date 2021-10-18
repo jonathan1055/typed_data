@@ -120,6 +120,23 @@ class DataFilterTest extends KernelTestBase {
   }
 
   /**
+   * Tests the operation of the 'upper' data filter.
+   *
+   * @covers \Drupal\typed_data\Plugin\TypedDataFilter\UpperFilter
+   */
+  public function testUpperFilter() {
+    $filter = $this->dataFilterManager->createInstance('upper');
+    $data = $this->typedDataManager->create(DataDefinition::create('string'), 'tEsT');
+
+    $this->assertTrue($filter->canFilter($data->getDataDefinition()));
+    $this->assertFalse($filter->canFilter(DataDefinition::create('any')));
+
+    $this->assertEquals('string', $filter->filtersTo($data->getDataDefinition(), [])->getDataType());
+
+    $this->assertEquals('TEST', $filter->filter($data->getDataDefinition(), $data->getValue(), []));
+  }
+
+  /**
    * @covers \Drupal\typed_data\Plugin\TypedDataFilter\DefaultFilter
    */
   public function testDefaultFilter() {
