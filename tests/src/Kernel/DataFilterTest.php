@@ -88,6 +88,23 @@ class DataFilterTest extends KernelTestBase {
   }
 
   /**
+   * Tests the operation of the 'count' data filter.
+   *
+   * @covers \Drupal\typed_data\Plugin\TypedDataFilter\CountFilter
+   */
+  public function testCountFilter() {
+    $filter = $this->dataFilterManager->createInstance('count');
+    $data = $this->typedDataManager->create(DataDefinition::create('string'), 'No one shall speak to the Man at the Helm.');
+
+    $this->assertTrue($filter->canFilter($data->getDataDefinition()));
+    $this->assertFalse($filter->canFilter(DataDefinition::create('any')));
+
+    $this->assertEquals('integer', $filter->filtersTo($data->getDataDefinition(), [])->getDataType());
+
+    $this->assertEquals(42, $filter->filter($data->getDataDefinition(), $data->getValue(), []));
+  }
+
+  /**
    * @covers \Drupal\typed_data\Plugin\TypedDataFilter\LowerFilter
    */
   public function testLowerFilter() {
