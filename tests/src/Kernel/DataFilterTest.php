@@ -147,6 +147,23 @@ class DataFilterTest extends KernelTestBase {
   }
 
   /**
+   * Tests the operation of the 'trim' data filter.
+   *
+   * @covers \Drupal\typed_data\Plugin\TypedDataFilter\TrimFilter
+   */
+  public function testTrimFilter() {
+    $filter = $this->dataFilterManager->createInstance('trim');
+    $data = $this->typedDataManager->create(DataDefinition::create('string'), ' Text with whitespace ');
+
+    $this->assertTrue($filter->canFilter($data->getDataDefinition()));
+    $this->assertFalse($filter->canFilter(DataDefinition::create('any')));
+
+    $this->assertEquals('string', $filter->filtersTo($data->getDataDefinition(), [])->getDataType());
+
+    $this->assertEquals('Text with whitespace', $filter->filter($data->getDataDefinition(), $data->getValue(), []));
+  }
+
+  /**
    * Tests the operation of the 'upper' data filter.
    *
    * @covers \Drupal\typed_data\Plugin\TypedDataFilter\UpperFilter
