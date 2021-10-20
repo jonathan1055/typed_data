@@ -120,6 +120,33 @@ class DataFilterTest extends KernelTestBase {
   }
 
   /**
+   * Tests the operation of the 'replace' data filter.
+   *
+   * @covers \Drupal\typed_data\Plugin\TypedDataFilter\ReplaceFilter
+   */
+  public function testReplaceFilter() {
+    $filter = $this->dataFilterManager->createInstance('replace');
+    $data = $this->typedDataManager->create(DataDefinition::create('string'), 'Text with mispeling to correct');
+
+    $this->assertTrue($filter->canFilter($data->getDataDefinition()));
+    $this->assertFalse($filter->canFilter(DataDefinition::create('any')));
+
+    $this->assertEquals('string', $filter->filtersTo($data->getDataDefinition(), [])->getDataType());
+
+    // Verify that two arguments are required.
+    $fails = $filter->validateArguments($data->getDataDefinition(), [/* No arguments given */]);
+    $this->assertEquals(1, count($fails));
+    $this->assertStringContainsString('Missing arguments for filter', (string) $fails[0]);
+
+    $fails = $filter->validateArguments($data->getDataDefinition(), [new \stdClass(), new \stdClass()]);
+    $this->assertEquals(2, count($fails));
+    $this->assertEquals('This value should be of the correct primitive type.', $fails[0]);
+    $this->assertEquals('This value should be of the correct primitive type.', $fails[1]);
+
+    $this->assertEquals('Text with misspelling to correct', $filter->filter($data->getDataDefinition(), $data->getValue(), ['mispeling', 'misspelling']));
+  }
+
+  /**
    * Tests the operation of the 'upper' data filter.
    *
    * @covers \Drupal\typed_data\Plugin\TypedDataFilter\UpperFilter
