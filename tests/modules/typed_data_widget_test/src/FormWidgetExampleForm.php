@@ -178,7 +178,11 @@ class FormWidgetExampleForm extends FormBase {
       // Read and write widget configuration via the state.
       $this->state->set('typed_data_widgets.' . $widget_id, $data->getValue());
       // Display the value saved. Use print_r in case the value is an array.
-      $this->messenger()->addMessage($this->t('Value saved: %value', ['%value' => print_r($data->getValue(), TRUE)]));
+      $this->messenger()->addMessage(
+        $this->t('Value saved: %value', [
+          '%value' => print_r($data->getValue(), TRUE),
+        ])
+      );
     }
   }
 
