@@ -39,9 +39,7 @@ class DataDefinitionFetcherTest extends KernelTestBase {
   protected $nodeDefinition;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['typed_data', 'system', 'node', 'field', 'user'];
 

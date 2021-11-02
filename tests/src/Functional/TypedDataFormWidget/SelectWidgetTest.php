@@ -24,9 +24,7 @@ class SelectWidgetTest extends FormWidgetBrowserTestBase {
   protected $widget;
 
   /**
-   * Modules to enable, in addition to those specified in the base class.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['text'];
 

@@ -35,9 +35,7 @@ class DataFilterTest extends KernelTestBase {
   protected $dataFilterManager;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = [
     'file',

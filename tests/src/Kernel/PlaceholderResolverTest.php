@@ -57,9 +57,7 @@ class PlaceholderResolverTest extends KernelTestBase {
   protected $simpleTestContext;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = [
     'typed_data',

@@ -49,9 +49,7 @@ class DataFetcherTest extends KernelTestBase {
   protected $entityTypeManager;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = [
     'typed_data',
