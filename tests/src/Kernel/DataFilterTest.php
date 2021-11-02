@@ -133,11 +133,11 @@ class DataFilterTest extends KernelTestBase {
 
     // Verify that two arguments are required.
     $fails = $filter->validateArguments($data->getDataDefinition(), [/* No arguments given */]);
-    $this->assertEquals(1, count($fails));
+    $this->assertCount(1, $fails);
     $this->assertStringContainsString('Missing arguments for filter', (string) $fails[0]);
 
     $fails = $filter->validateArguments($data->getDataDefinition(), [new \stdClass(), new \stdClass()]);
-    $this->assertEquals(2, count($fails));
+    $this->assertCount(2, $fails);
     $this->assertEquals('This value should be of the correct primitive type.', $fails[0]);
     $this->assertEquals('This value should be of the correct primitive type.', $fails[1]);
 
