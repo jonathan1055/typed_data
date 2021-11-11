@@ -9,9 +9,8 @@
         "source": "https://git.drupalcode.org/project/typed_data"
     },
     "require": {
-        "drupal/core": "^8.8.2 || ^9"
+        "drupal/core": "^9"
     },
-    "minimum-stability": "dev",
     "extra": {
         "drush": {
             "services": {
