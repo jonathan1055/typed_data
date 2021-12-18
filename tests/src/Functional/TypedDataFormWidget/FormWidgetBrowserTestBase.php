@@ -13,7 +13,6 @@ use Drupal\typed_data\Widget\FormWidgetManagerTrait;
  * @group typed_data
  */
 abstract class FormWidgetBrowserTestBase extends BrowserTestBase {
-
   use BrowserTestHelpersTrait;
   use FormWidgetManagerTrait;
   use TypedDataTrait;
