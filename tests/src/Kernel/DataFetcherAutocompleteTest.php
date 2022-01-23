@@ -2,10 +2,10 @@
 
 namespace Drupal\Tests\typed_data\Kernel;
 
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\Core\Field\FieldStorageDefinitionInterface;
 
 /**
  * Tests that data fetcher autocomplete function works correctly.

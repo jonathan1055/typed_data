@@ -3,12 +3,12 @@
 namespace Drupal\Tests\typed_data\Kernel;
 
 use Drupal\Core\Entity\TypedData\EntityDataDefinition;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\TypedData\Exception\MissingDataException;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\Core\Field\FieldStorageDefinitionInterface;
-use Drupal\Core\TypedData\Exception\MissingDataException;
 use Drupal\typed_data\Exception\InvalidArgumentException;
 
 /**
