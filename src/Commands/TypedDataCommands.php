@@ -20,11 +20,10 @@ class TypedDataCommands extends DrushCommands {
     // @see https://www.drupal.org/project/typed_data/issues/3164489
     // @phpcs:ignore DrupalPractice.Objects.GlobalDrupal.GlobalDrupal
     $entities = array_keys(\Drupal::entityTypeManager()->getDefinitions());
-    $unique = array_unique($entities);
-    sort($unique);
+    sort($entities);
 
     $this->output()->writeln(dt('Entity machine names:'));
-    $this->output()->writeln('  ' . implode(PHP_EOL . '  ', $unique) . PHP_EOL);
+    $this->output()->writeln('  ' . implode(PHP_EOL . '  ', $entities) . PHP_EOL);
   }
 
   /**
@@ -36,11 +35,10 @@ class TypedDataCommands extends DrushCommands {
   public function listContexts() {
     // @phpcs:ignore DrupalPractice.Objects.GlobalDrupal.GlobalDrupal
     $contexts = array_keys(\Drupal::service('context.repository')->getAvailableContexts());
-    $unique = array_unique($contexts);
-    sort($unique);
+    sort($contexts);
 
     $this->output()->writeln(dt('Global context variables:'));
-    $this->output()->writeln('  ' . implode(PHP_EOL . '  ', $unique) . PHP_EOL);
+    $this->output()->writeln('  ' . implode(PHP_EOL . '  ', $contexts) . PHP_EOL);
   }
 
   /**
@@ -51,17 +49,11 @@ class TypedDataCommands extends DrushCommands {
    */
   public function listDataTypes() {
     // @phpcs:ignore DrupalPractice.Objects.GlobalDrupal.GlobalDrupal
-    $definitions = \Drupal::service('typed_data_manager')->getDefinitions();
-    $datatypes = [];
-    foreach ($definitions as $plugin) {
-      // $datatypes[] = $plugin['class'];
-      $datatypes[] = $plugin['id'];
-    }
-    $unique = array_unique($datatypes);
-    sort($unique);
+    $datatypes = array_keys(\Drupal::service('typed_data_manager')->getDefinitions());
+    sort($datatypes);
 
     $this->output()->writeln(dt('Available TypedData data types:'));
-    $this->output()->writeln('  ' . implode(PHP_EOL . '  ', $unique) . PHP_EOL);
+    $this->output()->writeln('  ' . implode(PHP_EOL . '  ', $datatypes) . PHP_EOL);
   }
 
   /**
