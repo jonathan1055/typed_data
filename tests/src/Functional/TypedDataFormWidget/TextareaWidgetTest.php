@@ -86,8 +86,20 @@ class TextareaWidgetTest extends FormWidgetBrowserTestBase {
   public function testValidation() {
     $context_definition = ContextDefinition::create('text')
       ->setLabel('Test text area')
-      ->setDescription('Enter text, minimum 40 characters.')
-      ->addConstraint('Length', ['min' => 40, 'allowEmptyString' => FALSE]);
+      ->setDescription('Enter text, minimum 40 characters.');
+    // Omitting the 'allowEmptyString' argument in Symfony 4+ (which is used in
+    // Drupal 9.0+) gives a deprecation warning, but this option does not exist
+    // in in Symfony 6 (which is used in Drupal 10).
+    // @see https://www.drupal.org/project/typed_data/issues/3266222
+    if (version_compare(\Drupal::VERSION, '10.0', '>=')) {
+      $context_definition->addConstraint('Length', ['min' => 40]);
+    }
+    else {
+      $context_definition->addConstraint('Length', [
+        'min' => 40, 'allowEmptyString' => FALSE,
+      ]);
+    }
+
     $this->container->get('state')->set('typed_data_widgets.definition', $context_definition);
 
     $this->drupalLogin($this->createUser([], NULL, TRUE));
