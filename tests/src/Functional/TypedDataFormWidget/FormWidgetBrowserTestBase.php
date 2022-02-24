@@ -20,15 +20,15 @@ abstract class FormWidgetBrowserTestBase extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = [
-    'typed_data',
-    'typed_data_widget_test',
-  ];
+  protected $defaultTheme = 'stark';
 
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stark';
+  protected static $modules = [
+    'typed_data',
+    'typed_data_widget_test',
+  ];
 
   /**
    * @covers ::isApplicable

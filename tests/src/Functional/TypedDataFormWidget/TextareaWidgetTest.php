@@ -96,7 +96,8 @@ class TextareaWidgetTest extends FormWidgetBrowserTestBase {
     }
     else {
       $context_definition->addConstraint('Length', [
-        'min' => 40, 'allowEmptyString' => FALSE,
+        'min' => 40,
+        'allowEmptyString' => FALSE,
       ]);
     }
 
