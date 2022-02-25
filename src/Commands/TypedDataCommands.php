@@ -15,7 +15,7 @@ class TypedDataCommands extends DrushCommands {
    * @command typed-data:entities
    * @aliases el,entity-list
    */
-  public function listEntities() {
+  public function listEntities(): void {
     // Dependency injection deliberately not used. So ignore the phpcs message.
     // @see https://www.drupal.org/project/typed_data/issues/3164489
     // @phpcs:ignore DrupalPractice.Objects.GlobalDrupal.GlobalDrupal
@@ -32,7 +32,7 @@ class TypedDataCommands extends DrushCommands {
    * @command typed-data:contexts
    * @aliases cl,context-list
    */
-  public function listContexts() {
+  public function listContexts(): void {
     // @phpcs:ignore DrupalPractice.Objects.GlobalDrupal.GlobalDrupal
     $contexts = array_keys(\Drupal::service('context.repository')->getAvailableContexts());
     sort($contexts);
@@ -47,7 +47,7 @@ class TypedDataCommands extends DrushCommands {
    * @command typed-data:datatypes
    * @aliases tl,datatype-list
    */
-  public function listDataTypes() {
+  public function listDataTypes(): void {
     // @phpcs:ignore DrupalPractice.Objects.GlobalDrupal.GlobalDrupal
     $datatypes = array_keys(\Drupal::service('typed_data_manager')->getDefinitions());
     sort($datatypes);
@@ -62,7 +62,7 @@ class TypedDataCommands extends DrushCommands {
    * @command typed-data:datafilters
    * @aliases fl,datafilter-list
    */
-  public function listDataFilters() {
+  public function listDataFilters(): void {
     $this->formatOutput('plugin.manager.typed_data_filter', 'Available TypedDataFilter plugins:', FALSE);
   }
 
@@ -72,14 +72,14 @@ class TypedDataCommands extends DrushCommands {
    * @command typed-data:formwidgets
    * @aliases wl,formwidget-list
    */
-  public function listFormWidgets() {
+  public function listFormWidgets(): void {
     $this->formatOutput('plugin.manager.typed_data_form_widget', 'Available TypedDataFormWidget plugins:', FALSE);
   }
 
   /**
    * Helper function to format command output.
    */
-  protected function formatOutput($plugin_manager_service, $title, $categories = TRUE, $short = FALSE) {
+  protected function formatOutput(string $plugin_manager_service, string $title, bool $categories = TRUE, bool $short = FALSE): void {
     // @phpcs:ignore DrupalPractice.Objects.GlobalDrupal.GlobalDrupal
     $definitions = \Drupal::service($plugin_manager_service)->getDefinitions();
     $plugins = [];
