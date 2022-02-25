@@ -36,7 +36,7 @@ class DatetimeWidgetTest extends FormWidgetBrowserTestBase {
   /**
    * @covers ::isApplicable
    */
-  public function testIsApplicable() {
+  public function testIsApplicable(): void {
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('any')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('binary')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('boolean')));
@@ -57,7 +57,7 @@ class DatetimeWidgetTest extends FormWidgetBrowserTestBase {
    * @covers ::form
    * @covers ::extractFormValues
    */
-  public function testFormEditing() {
+  public function testFormEditing(): void {
     $context_definition = ContextDefinition::create('datetime_iso8601')
       ->setLabel('Test Example Date and Time')
       ->setDescription('Enter the date and time.')
@@ -109,7 +109,7 @@ class DatetimeWidgetTest extends FormWidgetBrowserTestBase {
    * @covers ::form
    * @covers ::flagViolations
    */
-  public function testValidation() {
+  public function testValidation(): void {
     $context_definition = ContextDefinition::create('datetime_iso8601')
       ->setLabel('Test Date and Time')
       ->setDefaultValue('2017-04-18T06:20:52');
@@ -140,7 +140,7 @@ class DatetimeWidgetTest extends FormWidgetBrowserTestBase {
   /**
    * @covers Drupal\typed_data\Widget\FormWidgetBase::createDefaultDateTime
    */
-  public function testNoDefault() {
+  public function testNoDefault(): void {
     $context_definition = ContextDefinition::create('datetime_iso8601')
       ->setLabel('Test Example Date and Time');
     $this->container->get('state')->set('typed_data_widgets.definition', $context_definition);

@@ -34,7 +34,7 @@ class TextareaWidgetTest extends FormWidgetBrowserTestBase {
   /**
    * @covers ::isApplicable
    */
-  public function testIsApplicable() {
+  public function testIsApplicable(): void {
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('any')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('binary')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('boolean')));
@@ -55,7 +55,7 @@ class TextareaWidgetTest extends FormWidgetBrowserTestBase {
    * @covers ::form
    * @covers ::extractFormValues
    */
-  public function testFormEditing() {
+  public function testFormEditing(): void {
     $context_definition = ContextDefinition::create('string')
       ->setLabel('Example textarea')
       ->setDescription('Some example textarea')
@@ -83,7 +83,7 @@ class TextareaWidgetTest extends FormWidgetBrowserTestBase {
    * @covers ::form
    * @covers ::flagViolations
    */
-  public function testValidation() {
+  public function testValidation(): void {
     $context_definition = ContextDefinition::create('text')
       ->setLabel('Test text area')
       ->setDescription('Enter text, minimum 40 characters.');

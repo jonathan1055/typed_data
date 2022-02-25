@@ -24,7 +24,7 @@ class TextDataTypeTest extends KernelTestBase {
    *
    * Based on core/tests/Drupal/KernelTests/Core/TypedData/TypedDataTest.php.
    */
-  public function testTextDatatype() {
+  public function testTextDatatype(): void {
     // Create the Text datatype object. Use a multi-line value.
     $value = $this->randomString() . "\r\n" . $this->randomString();
     $definition = DataDefinition::create('text');

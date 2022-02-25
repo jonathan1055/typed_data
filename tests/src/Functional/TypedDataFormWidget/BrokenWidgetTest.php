@@ -34,7 +34,7 @@ class BrokenWidgetTest extends FormWidgetBrowserTestBase {
   /**
    * @covers ::isApplicable
    */
-  public function testIsApplicable() {
+  public function testIsApplicable(): void {
     $this->assertTrue($this->widget->isApplicable(DataDefinition::create('any')));
     $this->assertTrue($this->widget->isApplicable(DataDefinition::create('binary')));
     $this->assertTrue($this->widget->isApplicable(DataDefinition::create('boolean')));
@@ -55,7 +55,7 @@ class BrokenWidgetTest extends FormWidgetBrowserTestBase {
    * @covers ::form
    * @covers ::extractFormValues
    */
-  public function testFormEditing() {
+  public function testFormEditing(): void {
     $data_type = 'string';
     $context_definition = ContextDefinition::create($data_type)
       ->setLabel('Broken example');
@@ -79,7 +79,7 @@ class BrokenWidgetTest extends FormWidgetBrowserTestBase {
    * @covers ::form
    * @covers ::flagViolations
    */
-  public function testValidation() {
+  public function testValidation(): void {
     // No validation as there is no input widget.
   }
 

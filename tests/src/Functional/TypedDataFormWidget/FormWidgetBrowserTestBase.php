@@ -33,7 +33,7 @@ abstract class FormWidgetBrowserTestBase extends BrowserTestBase {
   /**
    * @covers ::isApplicable
    */
-  public function testIsApplicable() {
+  public function testIsApplicable(): void {
     // Force any tests that extend this class to implement their own version
     // of this function.
     $this->fail('There is no implementation of the mandatory test function: ' . $this->getName());
@@ -43,7 +43,7 @@ abstract class FormWidgetBrowserTestBase extends BrowserTestBase {
    * @covers ::form
    * @covers ::extractFormValues
    */
-  public function testFormEditing() {
+  public function testFormEditing(): void {
     $this->fail('There is no implementation of the mandatory test function: ' . $this->getName());
   }
 
@@ -51,7 +51,7 @@ abstract class FormWidgetBrowserTestBase extends BrowserTestBase {
    * @covers ::form
    * @covers ::flagViolations
    */
-  public function testValidation() {
+  public function testValidation(): void {
     $this->fail('There is no implementation of the mandatory test function: ' . $this->getName());
   }
 
