@@ -86,7 +86,7 @@ before_script:
 
 script:
   # Run the PHPUnit tests which also include the kernel tests.
-  # - ./vendor/bin/phpunit -c ./core/phpunit.xml.dist ./modules/$MODULE/tests/
+  - ./vendor/bin/phpunit -c ./core/phpunit.xml.dist ./modules/$MODULE/tests/
 
   # Check for coding standards. First show the versions.
   - composer config --no-plugins allow-plugins.composer/installers true
