@@ -70,13 +70,16 @@ before_script:
   - composer --version
   - travis_retry composer install
 
+  # Install the other testing dependencies via Composer.
+  - travis_retry composer require slevomat/coding-standard sirbrillig/phpcs-variable-analysis
+
   # Coder is already installed as part of composer install. For Coder versions
   # up to 8.3.13 (Core 9.3) we need to set the installed_paths to pick up the
   # Drupal standards. From 8.3.14 (Core 9.4+) this is done at install time.
-  # - |
-  #   if [[ "$DRUPAL_CORE" == "9.1.x" ]]; then
-  #     $DRUPAL_ROOT/vendor/bin/phpcs --config-set installed_paths $DRUPAL_ROOT/vendor/drupal/coder/coder_sniffer
-  #   fi
+  - |
+    if [[ "$DRUPAL_CORE" == "9.1.x" ]]; then
+      $DRUPAL_ROOT/vendor/bin/phpcs --config-set installed_paths $DRUPAL_ROOT/vendor/drupal/coder/coder_sniffer/,$DRUPAL_ROOT/vendor/sirbrillig/phpcs-variable-analysis/,$DRUPAL_ROOT/vendor/slevomat/coding-standard/
+    fi
 
   # Start a web server on port 8888, run in the background.
   - php -S localhost:8888 &
