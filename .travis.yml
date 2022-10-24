@@ -71,7 +71,7 @@ before_script:
   - travis_retry composer install
 
   # Install the other testing dependencies via Composer.
-  - travis_retry composer require slevomat/coding-standard sirbrillig/phpcs-variable-analysis
+  - travis_retry composer require slevomat/coding-standard:* sirbrillig/phpcs-variable-analysis
 
   # Coder is already installed as part of composer install. For Coder versions
   # up to 8.3.13 (Core 9.3) we need to set the installed_paths to pick up the
